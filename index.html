@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aboobakker Hassan Sami — Cyber Security Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05070d;
+      --surface: rgba(15, 23, 42, 0.55);
+      --border: rgba(56, 189, 248, 0.16);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --cyan: #38bdf8;
+      --emerald: #10b981;
+      --mx: 50%;
+      --my: 50%;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, sans-serif;
+      overflow-x: clip;
+      line-height: 1.65;
+      transition: background-color 0.8s ease;
+    }
+
+    /* Subtle Cyber Grid Overlay */
+    .cyber-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    /* Cursor Spotlight */
+    .cursor-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(
+        520px circle at var(--mx) var(--my),
+        rgba(56, 189, 248, 0.1),
+        transparent 60%
+      );
+    }
+
+    /* Top Reading Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--emerald));
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 250;
+    }
+
+    /* Floating Glass Navbar */
+    nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 11px 24px;
+      border-radius: 999px;
+      background: rgba(5, 7, 13, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      max-width: 94vw;
+    }
+
+    .nav-logo {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    /* Shared Typography & Buttons */
+    .eyebrow {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--emerald));
+      color: #040812;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(56, 189, 248, 0.35);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.65);
+      color: #ffffff;
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+    }
+
+    /* 1. PARALLAX HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 660px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 0 20px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: -12%;
+      width: 124%;
+      height: 124%;
+      object-fit: cover;
+      filter: brightness(0.24) saturate(1.2) hue-rotate(15deg);
+      z-index: 0;
+      will-change: transform;
+    }
+
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(5, 7, 13, 0.2) 10%, #05070d 88%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1080px;
+    }
+
+    .hero-pill {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      background: rgba(16, 185, 129, 0.12);
+      color: #6ee7b7;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2.5rem, 8.2vw, 7.2rem);
+      font-weight: 800;
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .hero-title span {
+      display: block;
+      will-change: transform, opacity;
+    }
+
+    .hero-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.8px rgba(56, 189, 248, 0.9);
+    }
+
+    .hero-role {
+      margin: 22px auto 30px;
+      max-width: 620px;
+      color: #cbd5e1;
+      font-size: clamp(0.96rem, 1.8vw, 1.15rem);
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 28px;
+      z-index: 2;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* 2. SCROLL-LIT PROFILE & PARALLAX PORTRAIT */
+    .about-section {
+      position: relative;
+      z-index: 2;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 130px 24px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.8fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .reveal-text {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.45rem, 2.7vw, 2.3rem);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .reveal-text .word {
+      display: inline-block;
+      opacity: 0.16;
+      margin-right: 0.24em;
+      will-change: opacity;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 38px;
+      padding-top: 26px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-box strong {
+      display: block;
+      font-family: "Syne", sans-serif;
+      font-size: 1.45rem;
+      color: var(--cyan);
+    }
+
+    .stat-box span {
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .portrait-card {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: linear-gradient(145deg, #0f172a, #020617);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65), 0 0 36px rgba(56, 189, 248, 0.12);
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 118%;
+      object-fit: cover;
+      object-position: center top;
+      position: relative;
+      top: -9%;
+      will-change: transform;
+    }
+
+    .portrait-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(5, 7, 13, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      color: #e2e8f0;
+    }
+
+    /* 3. INFINITE ARSENAL MARQUEE */
+    .marquee-wrap {
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.3);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 40px;
+      width: max-content;
+      animation: marquee 26s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: clamp(0.95rem, 1.8vw, 1.35rem);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(226, 232, 240, 0.35);
+      white-space: nowrap;
+    }
+
+    .marquee-track span.sep {
+      color: var(--cyan);
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* 4. SCROLL-DRAWN EXPERIENCE & EDUCATION TIMELINE */
+    .timeline-section {
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 130px 24px;
+    }
+
+    .section-head {
+      margin-bottom: 56px;
+    }
+
+    .section-head h2 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .timeline-wrap {
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .timeline-rail {
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: rgba(148, 163, 184, 0.2);
+    }
+
+    .timeline-fill {
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--cyan), var(--emerald));
+      transform-origin: top;
+      transform: scaleY(0);
+    }
+
+    .timeline-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 30px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      will-change: transform, opacity;
+    }
+
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: 32px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--cyan);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
+    }
+
+    .timeline-card.edu-card::before {
+      border-color: var(--emerald);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.7);
+    }
+
+    .tl-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .tl-top h3 {
+      font-family: "Syne", sans-serif;
+      font-size: 1.45rem;
+      color: #ffffff;
+    }
+
+    .tl-date {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--cyan);
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .edu-card .tl-date {
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.28);
+    }
+
+    .tl-org {
+      font-size: 0.96rem;
+      color: #cbd5e1;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .tl-list {
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .tl-list li {
+      margin-bottom: 7px;
+    }
+
+    /* 5. PINNED HORIZONTAL PROJECT SHOWCASE */
+    .projects-section {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .projects-head {
+      padding: 0 6vw 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .projects-head h2 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 4.4vw, 3.4rem);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .projects-head p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .projects-track {
+      display: flex;
+      gap: 28px;
+      padding-left: 6vw;
+      padding-right: 10vw;
+      width: max-content;
+      will-change: transform;
+    }
+
+    .project-card {
+      position: relative;
+      width: clamp(320px, 52vw, 620px);
+      min-height: 410px;
+      border-radius: 22px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: #0a101d;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+ .project-bg {
+      position: absolute;
+      inset: 0;
+      width: 115%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.48) saturate(1.15);
+      transform: translateX(-6%);
+      transition: transform 0.65s ease, filter 0.4s ease;
+    }
+
+    .project-card:hover .project-bg {
+      transform: translateX(0%) scale(1.06);
+      filter: brightness(0.62);
+    }
+
+    .project-body {
+      position: relative;
+      z-index: 2;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(5, 7, 13, 0.96) 50%, transparent 100%);
+    }
+
+    .project-num {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--emerald);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .project-body h3 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    .project-body ul {
+      padding-left: 18px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .project-body li {
+      margin-bottom: 6px;
+    }
+
+    .stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stack-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #bae6fd;
+    }
+
+    /* 6. SKILLS & CERTIFICATIONS BENTO MATRIX */
+    .skills-section {
+      position: relative;
+      z-index: 2;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 130px 24px;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .bento-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      backdrop-filter: blur(10px);
+      will-change: transform, opacity;
+    }
+
+    .bento-card.wide {
+      grid-column: span 2;
+    }
+
+    .bento-card h3 {
+      font-family: "Syne", sans-serif;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chip-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      font-size: 0.84rem;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #e2e8f0;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .chip:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .cert-item {
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: rgba(5, 7, 13, 0.6);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .cert-item strong {
+      display: block;
+      font-size: 0.95rem;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+
+    .cert-item span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.76rem;
+      color: #6ee7b7;
+    }
+
+    /* 7. CONTACT FOOTER */
+    .contact-section {
+      position: relative;
+      z-index: 2;
+      min-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 24px;
+    }
+
+    .contact-title {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2.4rem, 7.2vw, 6.2rem);
+      font-weight: 800;
+      line-height: 0.96;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      will-change: transform, opacity;
+    }
+
+    .contact-meta {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 34px;
+    }
+
+    .contact-meta a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 26px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 860px) {
+      .about-section {
+        grid-template-columns: 1fr;
+        gap: 44px;
+        padding: 96px 20px;
+      }
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-card.wide {
+        grid-column: span 1;
+      }
+      nav {
+        gap: 14px;
+        padding: 10px 16px;
+      }
+      .nav-links {
+        gap: 12px;
+      }
+      .nav-links a {
+        font-size: 0.72rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cyber-grid"></div>
+  <div class="scroll-progress"></div>
+  <div class="cursor-glow"></div>
+
+  <!-- Floating Glass Navbar -->
+  <nav>
+    <a href="#top" class="nav-logo">
+      <span class="status-dot"></span> HASSAN.SEC
+    </a>
+    <div class="nav-links">
+      <a href="#profile">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- 1. PARALLAX HERO -->
+  <section class="hero" id="top" data-bg="#05070d">
+    <!-- Optional: replace with your own dark background photo (images/hero-bg.jpg) -->
+    <img class="hero-bg" src="https://picsum.photos/seed/cyberdarkgrid/1920/1200" alt="Cybersecurity ambient backdrop">
+    <div class="hero-vignette"></div>
+
+    <div class="hero-content">
+      <span class="hero-pill">Doha, Qatar &bull; Open to Opportunities</span>
+      <h1 class="hero-title">
+        <span class="hero-left">ABOOBAKKER</span>
+        <span class="hero-right hero-outline">HASSAN SAMI</span>
+      </h1>
+      <p class="hero-role">
+        Cyber Security Analyst &bull; VAPT &bull; Network Security &amp; SOC &bull; Fullstack Development
+      </p>
+      <div class="hero-actions">
+        <a href="HASSAN_CV_1.pdf" download class="btn btn-primary">Download Full CV (PDF)</a>
+        <a href="#projects" class="btn btn-ghost">Explore Projects</a>
+      </div>
+    </div>
+
+    <span class="scroll-cue">Scroll to Decrypt Profile &#8595;</span>
+  </section>
+
+  <!-- 2. SCROLL-LIT PROFILE & PORTRAIT -->
+  <section class="about-section" id="profile" data-bg="#070b16">
+    <div>
+      <span class="eyebrow">01 // Profile</span>
+      <p class="reveal-text" id="bio-text">
+        Aspiring Network and Cybersecurity Analyst with practical exposure to VAPT, security testing, and reporting. Developing CCNA networking skills across TCP/IP, subnetting, routing, and switching—paired with SOC concepts and fullstack development experience.
+      </p>
+
+      <div class="about-stats">
+        <div class="stat-box">
+          <strong>B.E. CS</strong>
+          <span>GPA 7.5 / 10.0</span>
+        </div>
+        <div class="stat-box">
+          <strong>2 Roles</strong>
+          <span>VAPT &amp; Fullstack</span>
+        </div>
+        <div class="stat-box">
+          <strong>5 Certs</strong>
+          <span>Cisco, Fortinet &amp; More</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portrait-card">
+      <!-- Save your headshot as images/profile.jpg inside your project folder -->
+      <img class="portrait-img" src="images/profile.jpg" onerror="this.src='https://picsum.photos/seed/cyberportrait/800/1000'" alt="Aboobakker Hassan Sami">
+      <div class="portrait-badge">
+        <span>ROLE: SEC_ANALYST</span>
+        <span>LOC: DOHA_QA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. INFINITE ARSENAL MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Burp Suite</span><span class="sep">//</span>
+      <span>Nmap</span><span class="sep">//</span>
+      <span>OWASP ZAP</span><span class="sep">//</span>
+      <span>Splunk SIEM</span><span class="sep">//</span>
+      <span>Kali Linux</span><span class="sep">//</span>
+      <span>Nessus</span><span class="sep">//</span>
+      <span>SQLmap</span><span class="sep">//</span>
+      <span>OWASP Top 10</span><span class="sep">//</span>
+      <span>Python &amp; OpenCV</span><span class="sep">//</span>
+      <span>CCNA Networking</span><span class="sep">//</span>
+      <!-- Duplicate for seamless loop -->
+      <span>Burp Suite</span><span class="sep">//</span>
+      <span>Nmap</span><span class="sep">//</span>
+      <span>OWASP ZAP</span><span class="sep">//</span>
+      <span>Splunk SIEM</span><span class="sep">//</span>
+      <span>Kali Linux</span><span class="sep">//</span>
+      <span>Nessus</span><span class="sep">//</span>
+      <span>SQLmap</span><span class="sep">//</span>
+      <span>OWASP Top 10</span><span class="sep">//</span>
+      <span>Python &amp; OpenCV</span><span class="sep">//</span>
+      <span>CCNA Networking</span><span class="sep">//</span>
+    </div>
+  </div>
+
+  <!-- 4. EXPERIENCE & EDUCATION TIMELINE -->
+  <section class="timeline-section" id="experience" data-bg="#060d14">
+    <div class="section-head">
+      <span class="eyebrow">02 // Career &amp; Education</span>
+      <h2>What I Studied &amp; Did</h2>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="timeline-rail"></div>
+      <div class="timeline-fill"></div>
+
+      <!-- Internship 1 -->
+      <article class="timeline-card">
+        <div class="tl-top">
+          <h3>VAPT Intern</h3>
+          <span class="tl-date">Aug 2025 &ndash; Feb 2026</span>
+        </div>
+        <p class="tl-org">EYEQDOTNET Pvt. Ltd.</p>
+        <ul class="tl-list">
+          <li>Performed Vulnerability Assessment and Penetration Testing (VAPT) on web applications aligned with OWASP Top 10 standards.</li>
+          <li>Tested for SQL Injection, XSS, CSRF, IDOR, authentication bypass, business logic flaws, and session management weaknesses.</li>
+          <li>Executed scanning and manual exploitation using Burp Suite, Nmap, and OWASP ZAP.</li>
+          <li>Documented Proof-of-Concept (PoC) evidence and collaborated with developers to remediate vulnerabilities and strengthen application security posture.</li>
+        </ul>
+      </article>
+
+      <!-- Internship 2 -->
+      <article class="timeline-card">
+        <div class="tl-top">
+          <h3>Fullstack Developer Intern</h3>
+          <span class="tl-date">Feb 2025 &ndash; May 2025</span>
+        </div>
+        <p class="tl-org">Thaniya Technology</p>
+        <ul class="tl-list">
+          <li>Developed and maintained responsive web applications using modern frontend and backend technologies.</li>
+          <li>Participated across the full software development lifecycle, from requirement gathering through deployment.</li>
+          <li>Designed user-friendly web pages while enforcing secure coding practices to prevent common web vulnerabilities.</li>
+        </ul>
+      </article>
+
+      <!-- Education -->
+      <article class="timeline-card edu-card">
+        <div class="tl-top">
+          <h3>Bachelor of Engineering &mdash; Computer Science</h3>
+          <span class="tl-date">2021 &ndash; 2025</span>
+        </div>
+        <p class="tl-org">Shree Devi Institute of Technology &bull; GPA: 7.5 / 10.0</p>
+        <ul class="tl-list">
+          <li>Built strong engineering foundations across computer networks, programming (Python, Java, SQL), web technologies, and information security.</li>
+          <li>Applied coursework directly into hands-on offensive security labs, VAPT engagements, and applied cryptography projects.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 5. PINNED HORIZONTAL PROJECTS SHOWCASE -->
+  <section class="projects-section" id="projects" data-bg="#07111a">
+    <div class="projects-head">
+      <div>
+        <span class="eyebrow">03 // Hands-On Security Labs</span>
+        <h2>Featured Projects</h2>
+      </div>
+      <p>Keep scrolling down to glide sideways through each project &rarr;</p>
+    </div>
+
+    <div class="projects-track">
+      <!-- Project 1 -->
+      <article class="project-card">
+        <img class="project-bg" src="https://picsum.photos/seed/soclab1/1200/900" alt="SOC Simulation Lab">
+        <div class="project-body">
+          <span class="project-num">Project 01 // Blue &amp; Red Team Lab</span>
+          <h3>Cybersecurity Home Lab &mdash; SOC Simulation</h3>
+          <ul>
+            <li>Configured a virtual lab deploying Kali Linux against Metasploitable targets to simulate real-world attack and defense scenarios.</li>
+            <li>Executed reconnaissance via Nmap alongside controlled brute-force and web-based attacks.</li>
+            <li>Integrated Splunk for centralized log collection, threat monitoring, and incident analysis.</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-tag">VirtualBox</span>
+            <span class="stack-tag">Kali Linux</span>
+            <span class="stack-tag">Metasploitable</span>
+            <span class="stack-tag">Splunk</span>
+            <span class="stack-tag">Burp Suite</span>
+            <span class="stack-tag">Nmap</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project-card">
+        <img class="project-bg" src="https://picsum.photos/seed/cybersecurity2/1200/900" alt="Web App VAPT">
+        <div class="project-body">
+          <span class="project-num">Project 02 // Offensive Security</span>
+          <h3>Web Application VAPT Assessment</h3>
+          <ul>
+            <li>Conducted end-to-end manual and automated assessments covering reconnaissance, service enumeration, and attack-surface mapping.</li>
+            <li>Validated SQLi, XSS, CSRF, and IDOR flaws while intercepting HTTP traffic to test auth and session controls.</li>
+            <li>Delivered PoC exploitation documentation and OWASP-aligned risk reports with actionable remediation steps.</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-tag">Burp Suite</span>
+            <span class="stack-tag">Nmap</span>
+            <span class="stack-tag">Nessus</span>
+            <span class="stack-tag">SQLmap</span>
+            <span class="stack-tag">Dirsearch</span>
+            <span class="stack-tag">Kali Linux</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project-card">
+        <img class="project-bg" src="https://picsum.photos/seed/stego3/1200/900" alt="Image Steganography">
+        <div class="project-body">
+          <span class="project-num">Project 03 // Data Confidentiality</span>
+          <h3>Image Steganography Security Project</h3>
+          <ul>
+            <li>Built a steganography system implementing Least Significant Bit (LSB) encoding and decoding to conceal confidential messages inside digital images.</li>
+            <li>Applied foundational cryptographic concepts to protect confidentiality with minimal visual distortion.</li>
+            <li>Designed a clean user interface for secure message encryption and decryption.</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">OpenCV</span>
+            <span class="stack-tag">LSB Steganography</span>
+            <span class="stack-tag">Cryptography</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6. SKILLS, CERTIFICATIONS & LANGUAGES -->
+  <section class="skills-section" id="skills" data-bg="#050912">
+    <div class="section-head">
+      <span class="eyebrow">04 // Technical Stack &amp; Credentials</span>
+      <h2>Skills &amp; Certifications</h2>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card">
+        <h3>Security &amp; VAPT</h3>
+        <div class="chip-wrap">
+          <span class="chip">Vulnerability Assessment</span>
+          <span class="chip">Penetration Testing</span>
+          <span class="chip">Web Application Security</span>
+          <span class="chip">OWASP Top 10</span>
+          <span class="chip">Threat Detection</span>
+          <span class="chip">Incident Response</span>
+          <span class="chip">SOC Monitoring</span>
+          <span class="chip">SIEM Basics</span>
+          <span class="chip">Log Analysis</span>
+          <span class="chip">Risk Assessment</span>
+          <span class="chip">Secure Coding</span>
+          <span class="chip">Security Reporting</span>
+        </div>
+      </div>
+
+      <div class="bento-card">
+        <h3>Networking &amp; Development</h3>
+        <div class="chip-wrap">
+          <span class="chip">TCP/IP</span>
+          <span class="chip">OSI Model</span>
+          <span class="chip">Subnetting</span>
+          <span class="chip">Routing &amp; Switching</span>
+          <span class="chip">DNS &amp; HTTP/HTTPS</span>
+          <span class="chip">Firewall Basics</span>
+          <span class="chip">Network Troubleshooting</span>
+          <span class="chip">Python</span>
+          <span class="chip">Java</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Frontend Development</span>
+        </div>
+      </div>
+
+      <div class="bento-card wide">
+        <h3>Certifications</h3>
+        <div class="cert-grid">
+          <div class="cert-item">
+            <strong>Introduction to Cybersecurity</strong>
+            <span>Cisco Networking Academy</span>
+          </div>
+          <div class="cert-item">
+            <strong>Fortinet NSE 1 &amp; NSE 2</strong>
+            <span>Network Security Associate</span>
+          </div>
+          <div class="cert-item">
+            <strong>Web Security Academy</strong>
+            <span>PortSwigger (OWASP Top 10, XSS, SQLi)</span>
+          </div>
+          <div class="cert-item">
+            <strong>Pre Security Path</strong>
+            <span>TryHackMe</span>
+          </div>
+          <div class="cert-item">
+            <strong>Data Analytics with Power BI</strong>
+            <span>NASSCOM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-card">
+        <h3>Core Strengths</h3>
+        <div class="chip-wrap">
+          <span class="chip">Analytical Thinking</span>
+          <span class="chip">Problem Solving</span>
+          <span class="chip">Attention to Detail</span>
+          <span class="chip">Team Collaboration</span>
+          <span class="chip">Documentation Skills</span>
+          <span class="chip">Continuous Learning</span>
+        </div>
+      </div>
+
+      <div class="bento-card">
+        <h3>Languages</h3>
+        <div class="chip-wrap">
+          <span class="chip">English (Fluent)</span>
+          <span class="chip">Hindi (Fluent)</span>
+          <span class="chip">Malayalam (Fluent)</span>
+          <span class="chip">Arabic (Beginner)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CONTACT CTA -->
+  <section class="contact-section" id="contact" data-bg="#05070d">
+    <span class="eyebrow">05 // Connect</span>
+    <h2 class="contact-title">Let's Secure<br>What's Next</h2>
+    <p class="contact-meta">
+      Doha, Qatar &bull;
+      <a href="tel:+97471070255">+974 71070255</a> &bull;
+      <a href="mailto:samiaboobakker97@gmail.com">samiaboobakker97@gmail.com</a>
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:samiaboobakker97@gmail.com" class="btn btn-primary">Email Me</a>
+      <button type="button" id="copy-email-btn" class="btn btn-ghost">Copy Email</button>
+      <a href="https://www.linkedin.com/in/aboobakker-sami" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      <a href="https://github.com/hassanxploit" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+      <a href="HASSAN_CV_1.pdf" download class="btn btn-ghost">Download CV</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Aboobakker Hassan Sami &mdash; Cyber Security Portfolio
+  </footer>
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Cursor spotlight tracking
+    window.addEventListener("mousemove", (e) => {
+      document.documentElement.style.setProperty("--mx", e.clientX + "px");
+      document.documentElement.style.setProperty("--my", e.clientY + "px");
+    });
+
+    // Top reading progress bar
+    gsap.to(".scroll-progress", {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.2
+      }
+    });
+
+    // Section background tone shift
+    document.querySelectorAll("[data-bg]").forEach((section) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 55%",
+        end: "bottom 55%",
+        onEnter: () => document.body.style.backgroundColor = section.dataset.bg,
+        onEnterBack: () => document.body.style.backgroundColor = section.dataset.bg
+      });
+    });
+
+    // 1. Hero Parallax & Kinetic Split
+    gsap.to(".hero-bg", {
+      yPercent: 22,
+      scale: 1.24,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
+
+    gsap.to(".hero-left", {
+      xPercent: -20,
+      opacity: 0.15,
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
+
+    gsap.to(".hero-right", {
+      xPercent: 20,
+      opacity: 0.15,
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
+
+    // 2. Scroll-Lit Word-by-Word Profile Reveal
+    const bioEl = document.getElementById("bio-text");
+    const words = bioEl.textContent.trim().split(/\s+/);
+    bioEl.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(" ");
+
+    gsap.to("#bio-text .word", {
+      opacity: 1,
+      stagger: 0.06,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".about-section",
+        start: "top 75%",
+        end: "center 45%",
+        scrub: 1
+      }
+    });
+
+    gsap.to(".portrait-img", {
+      yPercent: 18,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".about-section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
+
+    // 3. Self-Drawing Timeline Rail & Staggered Cards
+    gsap.to(".timeline-fill", {
+      scaleY: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".timeline-wrap",
+        start: "top 70%",
+        end: "bottom 70%",
+        scrub: 0.8
+      }
+    });
+
+    document.querySelectorAll(".timeline-card").forEach((card) => {
+      gsap.from(card, {
+        y: 45,
+        opacity: 0,
+        duration: 0.7,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          end: "top 60%",
+          scrub: 0.8
+        }
+      });
+    });
+
+    // 4. Pinned Horizontal Project Track
+    const projectsTrack = document.querySelector(".projects-track");
+
+    gsap.to(projectsTrack, {
+      x: () => -Math.max(0, projectsTrack.scrollWidth - window.innerWidth + 80),
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".projects-section",
+        pin: true,
+        scrub: 1.1,
+        end: () => "+=" + Math.max(500, projectsTrack.scrollWidth - window.innerWidth + 80),
+        invalidateOnRefresh: true
+      }
+    });
+
+    // 5. Skills & Certifications Bento Reveal
+    document.querySelectorAll(".bento-card").forEach((card) => {
+      gsap.from(card, {
+        y: 40,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 88%",
+          end: "top 65%",
+          scrub: 0.8
+        }
+      });
+    });
+
+    // 6. Contact Headline Zoom
+    gsap.from(".contact-title", {
+      scale: 0.86,
+      opacity: 0,
+      y: 35,
+      scrollTrigger: {
+        trigger: ".contact-section",
+        start: "top 82%",
+        end: "center 60%",
+        scrub: 1
+      }
+    });
+
+    window.addEventListener("load", () => ScrollTrigger.refresh());
+
+    // One-click Copy Email
+    const copyBtn = document.getElementById("copy-email-btn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText("samiaboobakker97@gmail.com");
+        copyBtn.textContent = "Email Copied!";
+        setTimeout(() => {
+          copyBtn.textContent = "Copy Email";
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
